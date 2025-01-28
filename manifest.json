@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "name": "Tabify",
+    "description": "Tabify: Declutter Your Browser, Boost Your Productivity!",
+    "version" : "0.1",
+    "icons": {
+        "48": "image.png",
+        "128": "image.png"
+    },
+    "action": {
+        "default_title": "Tab Tracker",
+        "default_image": {
+            "16": "image.png",
+            "24": "image.png",
+            "32": "image.png"
+        },
+        "default_popup": "index.html"
+        },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["storage",
+                    "tabs",
+                    "notifications"
+                ],
+    "host_permissions": ["http://*/*", "https://*/*"]
+}
