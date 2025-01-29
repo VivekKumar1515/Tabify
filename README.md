@@ -16,30 +16,22 @@
 
 ## Installation
 
-### Manual Installation (For Personal Use/Development)
+### Simple Installation (For Personal Use)
 
 1. **Clone the repository**:
    ```sh
    git clone https://github.com/VivekKumar1515/Tabify.git
-   cd Tabify
    ```
 
-2. **Install dependencies** (if applicable):
-   ```sh
-   npm install
-   ```
-
-3. **Build the project**:
-   ```sh
-   npm run build
-   ```
-
-4. **Load the extension in Chrome**:
-   - Open `chrome://extensions/` in your browser.
-   - Enable **Developer Mode** by toggling the switch in the top right corner.
-   - Click **Load unpacked** and select the `dist` or `build` folder from the project directory.
+2. **Load the extension in your browser**:
+   - Open the **Extensions Management** page in your browser:
+     - **Chrome**: Go to `chrome://extensions/`
+     - **Edge**: Go to `edge://extensions/`
+   - Enable **Developer Mode** (toggle switch in the top right).
+   - Click **Load unpacked** and select the cloned repository folder.
 
 ---
+
 
 ## How to Use
 
