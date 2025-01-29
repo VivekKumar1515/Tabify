@@ -78,5 +78,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 For questions or suggestions, open an issue or reach out to [vivekvasu1515@gmail.com](mailto:vivekvasu1515@gmail.com).
 
-
-instructions for installation should - directly clone the repo https://github.com/VivekKumar1515/Tabify and go the browser extensions management and load it from there simple
