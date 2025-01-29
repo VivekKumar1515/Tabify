@@ -65,7 +65,7 @@ chrome.runtime.onStartup.addListener(async () => {
 // Fetch and cache inactivity threshold from storage
 async function setInactivityThreshold() {
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.get("inactivityThreshold", (data) => {
+    chrome.storage.local.get("inactivityThreshold", (data) => {
       if (chrome.runtime.lastError) {
         return reject(chrome.runtime.lastError);
       }
@@ -87,8 +87,8 @@ function debouncedSave() {
   }, 300);
 }
 
-// Function to chunk the data into smaller pieces (30 tabs per chunk)
-function chunkData(data, chunkSize = 30) {
+// Function to chunk the data into smaller pieces (25 tabs per chunk)
+function chunkData(data, chunkSize = 25) {
   const chunks = [];
   let currentChunk = [];
 
@@ -108,11 +108,11 @@ function chunkData(data, chunkSize = 30) {
 
 // Save tabs to Chrome's storage in chunks
 function saveTabsToStorage() {
-  // Split the tabs into smaller chunks (30 tabs per chunk)
-  const tabChunks = chunkData(cachedTabs, 30);
+  // Split the tabs into smaller chunks (25 tabs per chunk)
+  const tabChunks = chunkData(cachedTabs, 25);
   
   tabChunks.forEach((chunk, index) => {
-    chrome.storage.sync.set({ [`tabs_chunk_${index}`]: chunk }, () => {
+    chrome.storage.local.set({ [`tabs_chunk_${index}`]: chunk }, () => {
       if (chrome.runtime.lastError) {
         console.error(`Error saving chunk ${index}:`, chrome.runtime.lastError);
       } else {
@@ -122,7 +122,7 @@ function saveTabsToStorage() {
   });
 
   // Optionally, store the total number of chunks so you can track how many chunks exist
-  chrome.storage.sync.set({ 'totalTabChunks': tabChunks.length }, () => {
+  chrome.storage.local.set({ 'totalTabChunks': tabChunks.length }, () => {
     if (chrome.runtime.lastError) {
       console.error("Error saving totalTabChunks:", chrome.runtime.lastError);
     } else {
@@ -134,7 +134,7 @@ function saveTabsToStorage() {
 // Fetch all tab chunks and reassemble the full list of tabs
 function loadTabsFromStorage() {
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.get('totalTabChunks', (data) => {
+    chrome.storage.local.get('totalTabChunks', (data) => {
       if (chrome.runtime.lastError || !data.totalTabChunks) {
         console.error('Error fetching totalTabChunks:', chrome.runtime.lastError);
         return reject(new Error('Failed to load tab chunks'));
@@ -146,7 +146,7 @@ function loadTabsFromStorage() {
       // Fetch each chunk and concatenate them
       let chunksLoaded = 0;
       for (let i = 0; i < totalChunks; i++) {
-        chrome.storage.sync.get([`tabs_chunk_${i}`], (chunkData) => {
+        chrome.storage.local.get([`tabs_chunk_${i}`], (chunkData) => {
           if (chrome.runtime.lastError) {
             console.error(`Error fetching chunk ${i}:`, chrome.runtime.lastError);
           } else if (chunkData[`tabs_chunk_${i}`]) {
@@ -317,7 +317,7 @@ setTimeout(setupInterval, 1000);
 
 // Listen for changes to the inactivity threshold in storage
 chrome.storage.onChanged.addListener((changes, areaName) => {
-  if (changes.inactivityThreshold && areaName === "sync") {
+  if (changes.inactivityThreshold && areaName === "local") {
     inactivityThreshold = changes.inactivityThreshold.newValue; // Update the threshold
     console.log("Updated inactivity threshold:", inactivityThreshold);
     setupInterval(); // Re-setup the interval with the new threshold
@@ -340,12 +340,14 @@ chrome.notifications.onButtonClicked.addListener(
 
         chrome.tabs.query({ active: true }, (result) => {
           result.forEach((tab) => activeTabs.add(tab.id));
-        });
+          
+          cachedTabs = cachedTabs.filter(
+            (tab) => (Date.now() - tab.lastAccessed) < interval || activeTabs.has(tab.id)
+          );
 
-        cachedTabs = cachedTabs.filter(
-          (tab) => (Date.now() - tab.lastAccessed) < interval || activeTabs.has(tab.id)
-        );
-        debouncedSave();
+
+          debouncedSave();
+        });
       } else if (buttonIndex === 1) {
         // Open a new tab to review inactive tabs
         console.log("Review Tabs clicked");
