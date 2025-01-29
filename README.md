@@ -1,82 +1,82 @@
 # Tabify - Smart Tab Management for Productivity
 
+**Tabify** is a browser extension that helps you manage your tabs efficiently and improve your productivity. It tracks inactive tabs, allows you to close them, and gives you insights into your tab management habits with a **Productivity Score**.
+
+---
+
 ## Features
 
-- **Track Inactive Tabs**: Automatically detects tabs that have been inactive beyond a set threshold.
-- **Remove Unused Tabs**: Select and close inactive tabs individually or all at once.
-- **Productivity Score**: Get a score based on your tab management habits.
-- **Notifications**: Receive alerts about inactive tabs with options to clear or review them.
+- **Track Inactive Tabs**: Automatically detects tabs that have been inactive for too long.
+- **Remove Unused Tabs**: Close tabs individually or all at once to declutter your browser.
+- **Productivity Score**: Gain insights into your tab habits and improve your focus.
+- **Notifications**: Receive notifications about inactive tabs with options to clear or review them.
 - **Inactivity Threshold**: Set the number of minutes and hours for inactivity before a tab is considered inactive, directly from the popup UI.
+
+---
+
 
 ## Installation
 
-### From Source (Development Mode)
+### Simple Installation (For Personal Use/Development)
 
-1. Clone this repository or download it as a ZIP:
+#### Option 1: Using Git (Clone the Repository)
 
-   - **Clone:**
-     ```sh
-     git clone https://github.com/VivekKumar1515/Tabify.git
-     cd Tabify
-     ```
-
-   - **Download ZIP:** [Download Tabify ZIP](https://github.com/VivekKumar1515/Tabify/archive/refs/heads/master.zip)
-
-2. Install dependencies (if applicable):
-
+1. **Clone the repository**:
    ```sh
-   npm install
+   git clone https://github.com/VivekKumar1515/Tabify.git
    ```
 
-3. Build the project (if needed):
+2. **Load the extension in your browser**:
+   - Open the **Extensions Management** page in your browser:
+     - **Chrome**: Go to `chrome://extensions/`
+     - **Edge**: Go to `edge://extensions/`
+   - Enable **Developer Mode** (toggle switch in the top right).
+   - Click **Load unpacked** and select the cloned repository folder.
 
-   ```sh
-   npm run build
-   ```
+#### Option 2: Using ZIP (Download as ZIP)
 
-4. Open your browser and navigate to `chrome://extensions/`.
+1. **Download the ZIP file** from [this link](https://github.com/VivekKumar1515/Tabify/archive/refs/heads/master.zip).
+2. Extract the contents of the ZIP file.
+3. **Load the extension in your browser**:
+   - Open the **Extensions Management** page in your browser:
+     - **Chrome**: Go to `chrome://extensions/`
+     - **Edge**: Go to `edge://extensions/`
+   - Enable **Developer Mode** (toggle switch in the top right).
+   - Click **Load unpacked** and select the extracted folder.
 
-5. Enable "Developer Mode" (toggle in the top right corner).
+---
 
-6. Click "Load unpacked" and select the `dist` or `build` folder inside the project.
 
-## Usage
+## How to Use
 
-- Configure the inactivity threshold in the extension's popup UI. You can set the number of hours and minutes a tab must be inactive before it is flagged.
-- Use the popup UI to view and manage inactive tabs.
-- Receive notifications about inactive tabs and choose to either clear or review them.
-- Monitor your Productivity Score for insights into your browsing habits.
+1. After installation, you'll see the **Tabify icon** in your browser toolbar.
+2. **Configure the inactivity threshold**:
+   - Click the Tabify icon to open the popup.
+   - Set the number of hours and minutes for inactivity before tabs are flagged as inactive.
+3. **View and manage inactive tabs**:
+   - The popup will show a list of inactive tabs. You can close tabs individually or close all at once.
+4. **Check your Productivity Score**:
+   - The popup will also display your Productivity Score based on your tab habits.
+
+---
 
 ## Contributing
 
-Contributions are welcome! To contribute:
+If you want to contribute to the project, please check out the source code repository at [Tabify Source Code](https://github.com/VivekKumar1515/Tabify-Source-Code).
 
-1. Fork the repository.
-2. Create a feature branch:
+Feel free to fork the repository and create pull requests for improvements or bug fixes.
 
-   ```sh
-   git checkout -b feature-branch
-   ```
-
-3. Commit your changes:
-
-   ```sh
-   git commit -m "Add new feature"
-   ```
-
-4. Push to the branch:
-
-   ```sh
-   git push origin feature-branch
-   ```
-
-5. Open a Pull Request.
+---
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+---
 
 ## Contact
 
-For questions or suggestions, open an issue or reach out to [vivekvasu1515@gmail.com](mailto:vivekvasu1515@gmail.com) or [GitHub](https://github.com/VivekKumar1515).
+For questions or suggestions, open an issue or reach out to [vivekvasu1515@gmail.com](mailto:vivekvasu1515@gmail.com).
 
+
+instructions for installation should - directly clone the repo https://github.com/VivekKumar1515/Tabify and go the browser extensions management and load it from there simple
