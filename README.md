@@ -17,7 +17,7 @@
 
 ## Installation
 
-### Simple Installation (For Personal Use/Development)
+### Simple Installation (For Personal Use)
 
 #### Option 1: Using Git (Clone the Repository)
 
