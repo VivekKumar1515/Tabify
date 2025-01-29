@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Tabify",
     "description": "Tabify: Declutter Your Browser, Boost Your Productivity!",
-    "version" : "0.1",
+    "version" : "1",
     "icons": {
         "48": "image.png",
         "128": "image.png"
@@ -21,7 +21,8 @@
     },
     "permissions": ["storage",
                     "tabs",
-                    "notifications"
+                    "notifications",
+                    "unlimitedStorage"
                 ],
     "host_permissions": ["http://*/*", "https://*/*"]
 }
