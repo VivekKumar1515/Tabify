@@ -259,31 +259,37 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) =>
   createOrUpdate(tab)
 );
 
-chrome.tabs.onActivated.addListener(async (activeInfo) => {
-  if (cachedTabs.length == 0) {
-    await loadTabsFromStorage();
-  }
-  await loadWindows();
+const onActivated = async (activeInfo) => {
+  setTimeout(async () => {
+    if (cachedTabs.length == 0) {
+      console.log("Here in the activated, loading tabs from storage")
+      
+      await loadTabsFromStorage();
+    }
+    await loadWindows();
+  
+    // Check if this window was previously tracked
+    if (windows.hasOwnProperty(activeInfo.windowId)) {
+      const prevTabId = windows[activeInfo.windowId]; // Previously active tab in this window
+  
+      // Update last accessed timestamps only if the previous tab existed
+      cachedTabs = cachedTabs.map((tab) => {
+        if (tab.id === prevTabId || tab.id === activeInfo.tabId) {
+          return { ...tab, lastAccessed: Date.now() };
+        }
+        return tab;
+      });
+    }
+  
+    // Update or create the active tab entry for this window
+    windows[activeInfo.windowId] = activeInfo.tabId;
+  
+    await setWindows(); // Save changes to storage
+    debouncedSave();
+  }, 600)
+}
 
-  // Check if this window was previously tracked
-  if (windows.hasOwnProperty(activeInfo.windowId)) {
-    const prevTabId = windows[activeInfo.windowId]; // Previously active tab in this window
-
-    // Update last accessed timestamps only if the previous tab existed
-    cachedTabs = cachedTabs.map((tab) => {
-      if (tab.id === prevTabId || tab.id === activeInfo.tabId) {
-        return { ...tab, lastAccessed: Date.now() };
-      }
-      return tab;
-    });
-  }
-
-  // Update or create the active tab entry for this window
-  windows[activeInfo.windowId] = activeInfo.tabId;
-
-  await setWindows(); // Save changes to storage
-  debouncedSave();
-});
+chrome.tabs.onActivated.addListener(activeInfo => onActivated(activeInfo));
 
 // Handle tab removal
 chrome.tabs.onRemoved.addListener(async (tabId) => {
